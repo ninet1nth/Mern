@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import { validationResult } from 'express-validator';
+import cors from 'cors';
 
 import {registerValidation,loginValidation} from './validations.js'
 
@@ -25,10 +26,15 @@ const app = express();
 const PORT = config.get('port');
 
 app.use(express.json());
+app.use(cors());
 
-app.post('/auth/login',loginValidation,UserController.login);
-app.post('/auth/register',registerValidation, UserController.register);
-app.get('/auth/me', checkAuth, UserController.getMe);
+
+app.post('/login',loginValidation,UserController.login);
+app.post('/register',registerValidation, UserController.register);
+app.get('/me', checkAuth, UserController.getMe);
+app.post('/dateRecording',UserController.dateRecording);
+app.get('/dateRecording',UserController.getDateTime);
+app.get('/services', UserController.getServices);
 
 app.listen(PORT, (err) =>{
      
