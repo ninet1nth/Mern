@@ -4,27 +4,38 @@ import bcrypt from 'bcrypt';
 import UserModel from '../models/User.js'
 import Services from '../models/Services.js';
 import DateRecording from '../models/DateRecording.js';
+import axios from 'axios';
+import DateTime from '../models/DateTime.js';
 
-export const getDateTime = async (req, res) => {
-    const { userName, serviceName, date, time } = req.query;
 
-    // Поиск в базе данных
-    DateRecording.findOne({ userName, serviceName, date, time }, (err, doc) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Ошибка при обработке запроса');
-        } else {
-            if (doc) {
-                // Если запись уже существует, отправляем данные обратно
-                res.json({ date: doc.date, time: doc.time });
-            } else {
-                // Если записи не существует, отправляем пустой объект
-                res.json({});
-            }
-        }
-    });
+
+export const getServices = async (req, res) => {
+    try {
+        const services = await Services.find();
+        res.status(200).json(services);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
+export const getDateTime = async (req, res) => {
+    try {
+       
+        const { date, time } = req.query;
 
+        
+        const records = await DateTime.find({ date, time });
+
+        if (records.length > 0) {
+            
+            res.status(400).json({ message: 'Время уже занято' });
+        } else {
+            
+            res.status(200).json({ message: 'Время свободно, вы успешно записались!' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 
 export const dateRecording = async(req,res)=>{
@@ -77,7 +88,7 @@ export const register = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
+        console.log('err');
         res.status(500).json({
             message: 'Не удалось зарегистрироваться',
         });
@@ -151,12 +162,5 @@ export const getMe = async (req, res) => {
         });
     }
 };
-export const getServices = async (req, res) => {
-    try {
-        const services = await Services.find();
-        res.status(200).json(services);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
+
 

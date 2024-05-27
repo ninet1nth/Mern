@@ -9,6 +9,10 @@ const DateRecordingSchema = new mongoose.Schema({
         type:String,
         requried:true,
     },
+    price:{
+        type:String,
+        requried:true,
+    },
     date:{
         type:String,
         requried:true,

@@ -30,9 +30,9 @@ class Login extends Component {
         const response = await axios.post('http://localhost:4444/login', { email, password });
         console.log(response.data);
         this.setState({ isLoggedIn: true, showSuccessAlert: true });
-        // Вызовите функцию onLogin, переданную в пропсах, и передайте ей необходимые данные
+        
         this.props.onLogin(true, response.data.fullName);
-        // Сохраните имя пользователя в localStorage
+        
         localStorage.setItem('fullName', response.data.fullName);
         setTimeout(() => {
           this.setState({ redirect: true });
@@ -50,31 +50,40 @@ class Login extends Component {
     
     render() {
       if (this.state.redirect) {
+        
         return <Navigate to="/" />;
       }
       return (
-        <Container style={{ maxWidth: '500px' }}>
+        
+        
+        <div>
+<Container style={{ maxWidth: '500px' }}>
           {this.state.showSuccessAlert && <Alert variant="success">Успешный вход!</Alert>}
           {this.state.showErrorAlert && <Alert variant="danger">{this.state.errorMessage}</Alert>}
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email адрес</Form.Label>
-              <Form.Control style={{border: '1px solid black'}} type="email" placeholder="Введите email" name="email" onChange={this.handleInputChange} />
+              <Form.Control style={{border: '1px solid black',fontSize: '28px'}} type="email" placeholder="Введите email" name="email" onChange={this.handleInputChange} />
             </Form.Group>
     
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Пароль</Form.Label>
-              <Form.Control style={{border: '1px solid black'}} type="password" placeholder="Пароль" name="password" onChange={this.handleInputChange} />
+              <Form.Control style={{border: '1px solid black',fontSize: '28px'}} type="password" placeholder="Пароль" name="password" onChange={this.handleInputChange} />
             </Form.Group>
     
-            <Button variant="success" type="submit" style={{marginRight:"30px",marginTop:"10px"}}>
+            <Button variant="success" type="submit" style={{marginRight:"30px",marginTop:"10px",fontSize: '26px'}}>
               Войти
             </Button>
-            <Button variant="primary" type="submit" style={{marginRight:"30px",marginTop:"10px"}} href='/register'>
+            <Button variant="primary" type="submit" style={{marginRight:"30px",marginTop:"10px",fontSize: '26px'}} href='/register'>
               Зарегистрироваться
             </Button>
           </Form>
         </Container>
+
+        
+        </div>
+        
+        
       );
     }
 }

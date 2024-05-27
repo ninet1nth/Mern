@@ -36,20 +36,20 @@ class Services extends Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className="services" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {this.state.services.map(service => (
                     <Card key={service._id} style={{ width: '50%', marginBottom: '20px', marginTop: "20px" }}>
                         <Card.Img variant="top" src={service.img} />
                         <Card.Body>
-                            <Card.Title style={{ textAlign: 'center' }}>{service.name}</Card.Title>
+                            <Card.Title className='serviceName' style={{ textAlign: 'center' }}><h1>{service.name}</h1></Card.Title>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
-                            <ListGroup.Item style={{ overflow: 'auto', maxHeight: '150px' }}>{service.description}</ListGroup.Item>
+                            <ListGroup.Item style={{ overflow: 'auto', maxHeight: '250px' }}>{service.description}</ListGroup.Item>
                             <ListGroup.Item style={{ overflow: 'auto', maxHeight: '150px' }}>Цена:{service.price}</ListGroup.Item>
                         </ListGroup>
-                        <Card.Body style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Button variant="primary" onClick={() => this.handleButtonClick(service.name)} style={{ marginRight: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Записаться</Button>
-                            <Button variant="secondary" href="#">Подробнее об услуге</Button>
+                        <Card.Body className='serviceButton' style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Button className='serviceButton1' variant="primary" onClick={() => this.handleButtonClick(service.name)} style={{ marginRight: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '20px' ,width:'80%'}}>Записаться</Button>
+                            
                         </Card.Body>
                     </Card>
                 ))}

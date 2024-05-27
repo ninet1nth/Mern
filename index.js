@@ -33,8 +33,8 @@ app.post('/login',loginValidation,UserController.login);
 app.post('/register',registerValidation, UserController.register);
 app.get('/me', checkAuth, UserController.getMe);
 app.post('/dateRecording',UserController.dateRecording);
-app.get('/dateRecording',UserController.getDateTime);
 app.get('/services', UserController.getServices);
+app.get('/dateRecording', UserController.getDateTime);
 
 app.listen(PORT, (err) =>{
      
