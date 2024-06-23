@@ -31,7 +31,7 @@ class Home extends Component {
     render() {
         return (
             <div className='home'>
-                <h1 className="annabelle" style={{ textAlign: 'center', marginTop: '20px' }}>Marinail </h1>
+                <h1 className="annabelle" style={{ textAlign: 'center', marginTop: '20px' }}>Marynail </h1>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <div
                         style={{
